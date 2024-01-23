@@ -26,10 +26,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const navigate = useNavigate();
   //   console.log(user.token);
   const handleLogin = async () => {
-    const navigate = useNavigate();
     try {
       const res = await axios.post(logurl, {
         email,
@@ -38,7 +37,7 @@ const Login = () => {
       //   console.log(res.data.token);
       localStorage.setItem("token", res.data.token);
       login(res.data.token);
-      navigate("/doctor");
+      navigate("/doctors");
     } catch (error) {
       console.log(error);
     }
