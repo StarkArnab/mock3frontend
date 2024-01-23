@@ -16,6 +16,7 @@ import {
 import { AuthContext } from "../authContext/AuthContext";
 import axios from "axios";
 import { backendApi } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 const logurl = `${backendApi}/user/login`;
 const sigurl = `${backendApi}/user/signup`;
@@ -28,6 +29,7 @@ const Login = () => {
 
   //   console.log(user.token);
   const handleLogin = async () => {
+    const navigate = useNavigate();
     try {
       const res = await axios.post(logurl, {
         email,
@@ -36,6 +38,7 @@ const Login = () => {
       //   console.log(res.data.token);
       localStorage.setItem("token", res.data.token);
       login(res.data.token);
+      navigate("/doctor");
     } catch (error) {
       console.log(error);
     }
